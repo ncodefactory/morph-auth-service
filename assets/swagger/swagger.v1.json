@@ -1,0 +1,9 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "morph-auth-service - an webapi created using morph-cli",
+    "version": "0.0.1",
+    "title": "morph-auth-service",
+    "contact": { "email": "bartosz.solarski@hotmail.com" }
+  }
+}

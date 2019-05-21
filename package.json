@@ -1,0 +1,65 @@
+{
+  "name": "morph-auth-service",
+  "description": "morph-auth-service - an webapi created using morph-cli",
+  "version": "0.0.1",
+  "private": false,
+  "license": "MIT",
+  "author": {
+    "name": "Bartosz Solarski",
+    "email": "bartosz.solarski@hotmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ncodefactory/morph-auth-service"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "compile": "shx rm -rf .compiled && babel src --out-dir .compiled --source-maps",
+    "start": "npm run prepare && node dist/app.js",
+    "test": "mocha --reporter mochawesome --reporter-options reportDir=test-results src/**/*spec.js --require @babel/register --recursive",
+    "prepare": "shx rm -rf dist && cross-env NODE_ENV=production babel src --out-dir dist --ignore '**/*.spec.js' && shx mkdir -p dist/static/swagger && shx cp assets/swagger/*.json dist/static/swagger",
+    "docker-build": "docker build -t morph-auth-service . && docker image prune -f",
+    "docker-run": "docker run -d -p 5001:5001 --restart=always -e \"TZ=Europe/Warsaw\" -e \"PORT=5001\" --name morph-auth-service morph-auth-service",
+    "upgrade": "npm i -g npm-check-updates && ncu -u && npm install"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "assert": "^1.4.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "mocha": "^6.1.4",
+    "mochawesome": "^3.1.2",
+    "shx": "^0.3.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1"
+  },
+  "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "dotenv": "^7.0.0",
+    "iconv-lite": "^0.4.24",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compress": "^3.0.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa2-static-middleware": "^1.0.3",
+    "koa2-swagger-ui": "^2.13.2"
+  }
+}
