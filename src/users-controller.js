@@ -56,7 +56,9 @@ const userLoginHandler = async (ctx, next) => {
   const { password, ...userInfoWithoutPassword } = user;
   if (await bcrypt.compare(ctx.request.body.password, password)) {
     if (TOKEN_BODY_NAME == null) {
-      ctx.cookies.set(TOKEN_COOKIE_NAME, jwtSign(userInfoWithoutPassword), { httpOnly: true });
+      ctx.cookies.set(TOKEN_COOKIE_NAME, jwtSign(userInfoWithoutPassword), {
+        httpOnly: true,
+      });
       ctx.status = 200;
     } else {
       const body = {};

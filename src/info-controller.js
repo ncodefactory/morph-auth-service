@@ -16,5 +16,4 @@ const getInfoHandler = async (ctx) => {
   }
 };
 
-
 export { getInfoHandler }; // eslint-disable-line import/prefer-default-export

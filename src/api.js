@@ -20,7 +20,9 @@ app.use(bodyParser());
 app.use(async (ctx, next) => next().catch((err) => {
   if (err.status === 401) {
     ctx.status = 401;
-    const errMessage = err.originalError ? err.originalError.message : err.message;
+    const errMessage = err.originalError
+      ? err.originalError.message
+      : err.message;
     ctx.body = {
       error: errMessage,
     };
