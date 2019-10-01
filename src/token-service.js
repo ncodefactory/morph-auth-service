@@ -7,7 +7,7 @@ const jwtSign = payload => jwt.sign(
     data: payload,
     session: uuid4(),
     // exp in seconds
-    exp: Math.floor(Date.now() / 1000) - 60 * 60, // 60 seconds * 60 minutes = 1 hour
+    exp: Math.floor(Date.now() / 1000) + 60 * 60, // 60 seconds * 60 minutes = 1 hour
   },
   SECRET,
 );
